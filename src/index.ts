@@ -1,6 +1,7 @@
 import "reflect-metadata"
 import express, { Request, Response } from 'express';
 import { User } from "./Entities/User.entitty";
+import { AgeBracket } from "./Entities/User.entitty"
 import { Agency } from "./Entities/agency.entity";
 import AppDataSource from "./datasource/dataSource";
 
@@ -23,46 +24,79 @@ app.get('/', async (req: Request, res: Response) => {
 })
 
 app.post('/', async (req: Request, res: Response) => {
-  let userRepo = AppDataSource.getRepository(User);
+  let agencyRepo = AppDataSource.getRepository(Agency);
 
-  // const course1 = new Course();
-  // course1.code = "CS-001";
-  // course1.title = "Computer Programming"; use this agency
+  //first user
+  const user1 = new User();
+  user1.email = "adekule@gmail.com";
+  user1.firstName = "adekulnle";
+  user1.lastName = "isiak";
+  user1.contactNumber = 555555555;
+  user1.address = "bodija";
+  user1.postcode = "202220";
+  user1.benefit = true;
+  user1.consent = true;
+  user1.available = true;
+  user1.houseDemography = "not sure";
+  user1.ethnicity = "black";
+  user1.age = AgeBracket._18_24;
+  user1.benefits = "it true o";
+  user1.timeOfCollection = new Date();
+  //user.agency = agency1;
 
-  const user = new User();
-  user.email = "smadays@gmail.com";
-  user.firstName = "Ahmad";
-  user.lastName = "Asad";
-  user.contactNumber = 5555555;
-  user.address = "Asad";
-  user.postcode = "Asad";
-  user.benefit = true;
-  user.consent = true;
-  user.available = true;
-  user.houseDemography = "Asad";
-  user.ethnicity = "Asad";
-  user.age = 18_24;
-  user.benefits = "Asad";
-  //user.timeOfCollection =  Date;
-  //user.agency= [agency];
+  //second user
+  const user2 = new User();
+  user2.email = "smadays@gmail.com";
+  user2.firstName = "amina";
+  user2.lastName = "Adeoti";
+  user2.contactNumber = 555555555;
+  user2.address = "bodija";
+  user2.postcode = "202220";
+  user2.benefit = true;
+  user2.consent = true;
+  user2.available = true;
+  user2.houseDemography = "not sure";
+  user2.ethnicity = "black";
+  user2.age = AgeBracket._25_34;
+  user2.benefits = "it true o";
+  user2.timeOfCollection = new Date();
+  //user.agency = agency1;
+
+  //3rd user 
+  const user3 = new User();
+  user3.email = "smadays@gmail.com";
+  user3.firstName = "Ahmad";
+  user3.lastName = "Asad";
+  user3.contactNumber = 555555555;
+  user3.address = "bodija";
+  user3.postcode = "202220";
+  user3.benefit = true;
+  user3.consent = true;
+  user3.available = true;
+  user3.houseDemography = "not sure";
+  user3.ethnicity = "black";
+  user3.age = AgeBracket._OVER_65;
+  user3.benefits = "it true o";
+  user3.timeOfCollection = new Date();
+  //user.agency = agency1;
+
+  const agency1 = new Agency();
+  agency1.name = "The faithful group";
+  agency1.organisation = "The faithful group association";
+  agency1.email = "faithful@gmail.com";
+  agency1.contact = "08187145866";
+  agency1.users = [user1, user2, user3]
+
+  let savedAgency = await agencyRepo.find({
+    relations: ["user"]
+  })
 
 
-  let savedUser = await userRepo.find()
-
-
-  res.json(savedUser);
+  res.json(savedAgency);
 
 
 
 })
-
-
-
-
-
-
-
-
 
 
 

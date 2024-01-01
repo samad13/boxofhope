@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 import { join } from "path";
 import { Agency } from "./agency.entity";
 
-enum AgeBracket {
+export enum AgeBracket {
   _18_24 = "18_24",
   _25_34 = "25_34",
   _35_44 = "35_44",
@@ -65,7 +65,7 @@ export class User {
   @Column({ type: "date" })
   timeOfCollection: Date;
 
-  @ManyToOne(() => Agency, (agency) => agency.user, { cascade: true })
+  @ManyToOne(() => Agency, (agency) => agency.users, { cascade: true })
   agency: Agency;
 }
 

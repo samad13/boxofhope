@@ -17,10 +17,10 @@ export class Agency {
     email: string;
 
     @Column({ nullable: true })
-    contact: boolean;
+    contact: string;
 
     @OneToMany(() => User, (user) => user.agency, { cascade: true })
-    user: User[]
+    users: User[]
 
 }
 
